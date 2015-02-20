@@ -6,19 +6,20 @@ title: iSCSI as Persistent Storage for Kubernetes and Docker Container
 [iSCSI](http://en.wikipedia.org/wiki/ISCSI) has been widely adopted in data centers. It is the default implementation for [OpenStack Cinder](https://wiki.openstack.org/wiki/Cinder). Cinder defines a common block storage interface so storage vendors can supply their own plugins to present their storage products to Nova compute. As it happens, [most of the vendor supplied plugins use iSCSI] (https://wiki.openstack.org/wiki/CinderSupportMatrix).
 
 ### Containers: How to Persist Data to iSCSI Storage?
-Persisting Data inside a container can be done in two ways.
+Persisting aata inside a container can be done in two ways.
 
 
 #### Container sets up iSCSI session
 
-The iSCSI session is initiated inside the container, channel goes through Docker NAT to external iSCSI target. This approach doesn't require host's support and is thus portal. However, the Container is likely to suffer suboptimal performance, because Docker NAT doesn't deliver good performance, as reseachers at IBM [found](http://domino.research.ibm.com/library/cyberdig.nsf/papers/0929052195DD819C85257D2300681E7B/$File/rc25482.pdf). Since iSCSI is highly senstive to network performance, delay or jitters will cause iSCSI connection timeout and retries. This approach is thus not preferred for mission-critical services.
+The iSCSI session is initiated inside the container, iSCSI traffic goes through Docker NAT to external iSCSI target. This approach doesn't require host's support and is thus portable. However, the Container is likely to suffer from suboptimal network performance, because Docker NAT doesn't deliver good performance, as reseachers at IBM [found](http://domino.research.ibm.com/library/cyberdig.nsf/papers/0929052195DD819C85257D2300681E7B/$File/rc25482.pdf). 
+
+Since iSCSI is highly senstive to network performance, delay or jitters will cause iSCSI connection timeout and retries. This approach is thus not preferred for mission-critical services.
 
 #### Host sets up iSCSI session
 
-
-Host intitiates the iSCSI session, attaches iSCSI disk, and mounts the filesystem on the disk to a local directory, and shares the filesystem with Container. This approach doesn't need Docker NAT and is conceivably higher performing than the first approach.
+Host intitiates the iSCSI session, attaches iSCSI disk, mounts the filesystem on the disk to a local directory, and shares the filesystem with Container. This approach doesn't need Docker NAT and is conceivably higher performing than the first approach.
  
-In fact, this approach is the foundation of the iSCSI persistent storage for Kubernetes, discussed in the following.
+This approach is implemented in the iSCSI persistent storage for Kubernetes, discussed in the following.
 
 ### What is Kubernetes?
 [Kubernetes](https://github.com/GoogleCloudPlatform/kubernetes/) is an open source Linux Container orchestrator developed by Google, Red Hat, etc. Kubernetes creates, schedules, minotors, and deletes containers across a cluster of Linux hosts. Kubernetes defines Containers as "pod", which is declared in a set of json files. 
@@ -28,8 +29,8 @@ A Container running MySQL wants persistent storage so the database can survive. 
 
 Currently Kubernetes provides [three storage volume types](https://github.com/GoogleCloudPlatform/kubernetes/blob/master/docs/volumes.md): empty_dir, host_dir, and GCE Persistent Disk. 
 
-1. empty_dir. empty_dir is not meant to be long lasting. When the pod is deleted, the data on empty_dir is lost.
-2. host_dir. host_dir presents a directory on the host to the container. Container sees this directory through a local mountpoint. Steve Watts has written an excellent [blog](http://www.emergingafrican.com/2015/02/enabling-docker-volumes-and-kubernetes.html) on provisioning NFS to containers by way of host_dir. 
+1. empty\_dir. empty\_dir is not meant to be long lasting. When the pod is deleted, the data on empty_dir is lost.
+2. host\_dir. host\_dir presents a directory on the host to the container. Container sees this directory through a local mountpoint. Steve Watts has written an excellent [blog](http://www.emergingafrican.com/2015/02/enabling-docker-volumes-and-kubernetes.html) on provisioning NFS to containers by way of host_dir. 
 3. GCE Persistent Disk. You can also use the persistent storage service available at Google Compute Engine. Kubernetes allows containers to access data residing on GCE Persisent Disk. 
 
 ### iSCSI Disk: a New Persistent Storage for Kubernetes
