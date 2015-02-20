@@ -70,6 +70,7 @@ Once your pod is created, run it on the Kubernetes master:
 
 Here is my command and output:
 
+```console
     # cluster/kubectl.sh create -f examples/iscsi-pd/iscsi-pd.json 
     current-context: ""
     Running: cluster/../cluster/gce/../../_output/local/bin/linux/amd64/kubectl create -f examples/iscsi-pd/iscsi-pd.json
@@ -79,16 +80,18 @@ Here is my command and output:
     Running: cluster/../cluster/gce/../../_output/local/bin/linux/amd64/kubectl get pods
     POD                                    IP                  CONTAINER(S)        IMAGE(S)                 HOST                      LABELS              STATUS
     iscsipd                                172.17.0.6          iscsipd-ro          kubernetes/pause         fed-minion/10.16.154.75   <none>              Running
-                                                           iscsipd-rw          kubernetes/pause                                                       
+                                                           iscsipd-rw          kubernetes/pause                                                    
+```
 
 On the Kubernetes node, I got these in mount output
 
+```console
     #mount |grep kub
     /dev/sdb on /var/lib/kubelet/plugins/kubernetes.io/iscsi-pd/iscsi/10.16.154.81:3260/iqn.2014-12.world.server:storage.target1/lun/0 type ext4 (ro,relatime,stripe=1024,data=ordered)
     /dev/sdb on /var/lib/kubelet/pods/4ab78fdc-b927-11e4-ade6-d4bed9b39058/volumes/kubernetes.io~iscsi-pd/iscsipd-ro type ext4 (ro,relatime,stripe=1024,data=ordered)
     /dev/sdc on /var/lib/kubelet/plugins/kubernetes.io/iscsi-pd/iscsi/10.16.154.81:3260/iqn.2014-12.world.server:storage.target1/lun/1 type xfs (rw,relatime,attr2,inode64,noquota)
     /dev/sdc on /var/lib/kubelet/pods/4ab78fdc-b927-11e4-ade6-d4bed9b39058/volumes/kubernetes.io~iscsi-pd/iscsipd-rw type xfs (rw,relatime,attr2,inode64,noquota)
-
+```
 
  Run *docker inspect* and I found the Containers mounted the host directory into the their */mnt/iscsipd* directory.
  
