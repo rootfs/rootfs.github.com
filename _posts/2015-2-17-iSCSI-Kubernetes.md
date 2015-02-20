@@ -7,8 +7,10 @@ title: iSCSI as Persistent Storage for Kubernetes and Docker Container
 
 ### Containers: How to Persist Data?
 Persisting Data inside a container can be done in two ways.
+
+
  1. A Container sets up iSCSI initiator, the iSCSI channel goes through Docker NAT to external iSCSI target. This approach doesn't require host's support and is thus portal. However, the Container is likely to suffer suboptimal performance, because Docker NAT doesn't deliver good performance, as reseachers at IBM [found](http://domino.research.ibm.com/library/cyberdig.nsf/papers/0929052195DD819C85257D2300681E7B/$File/rc25482.pdf). Since iSCSI is highly senstive to network performance, delay or jitters will cause iSCSI connection timieout and retries. This approach is thus not preferred for mission-critical services.
- 2. Host initiates iSCSI connection, attaches iSCSI disk, and mounts the filesystem on the disk to a local directory, and shares the filesystem with Container. This approach doesn't need Docker NAT and is conceivably higher performing than the first approach.
+  2. Host initiates iSCSI connection, attaches iSCSI disk, and mounts the filesystem on the disk to a local directory, and shares the filesystem with Container. This approach doesn't need Docker NAT and is conceivably higher performing than the first approach.
  
 In fact, this approach is the foundation of the iSCSI persistent storage for Kubernetes, discussed in the following.
 
