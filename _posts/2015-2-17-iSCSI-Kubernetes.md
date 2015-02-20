@@ -17,7 +17,7 @@ Since iSCSI is highly senstive to network performance, delay or jitters will cau
 
 #### Host sets up iSCSI session
 
-Host intitiates the iSCSI session, attaches iSCSI disk, mounts the filesystem on the disk to a local directory, and shares the filesystem with Container. This approach doesn't need Docker NAT and is conceivably higher performing than the first approach.
+Host initiates the iSCSI session, attaches iSCSI disk, mounts the filesystem on the disk to a local directory, and shares the filesystem with Container. This approach doesn't need Docker NAT and is conceivably higher performing than the first approach.
  
 This approach is implemented in the iSCSI persistent storage for Kubernetes, discussed in the following.
 
