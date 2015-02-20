@@ -38,7 +38,9 @@ Since on-premise enterprise data centers and OpenStack providers have already in
 ### Implementation
 [My Kubernetes pull request](https://github.com/GoogleCloudPlatform/kubernetes/pull/4612) provides a solution to this end. 
 
-As seen in this  high level architecture ![_config.yml]({{ site.baseurl }}/images/architecture.png)
+As seen in this  high level architecture
+
+![_config.yml]({{ site.baseurl }}/images/architecture.png)
 
 When *kubelete* creates the pod on the *node*(previously known as *minion*), it logins into iSCSI target, and mounts the specified disks to the container's volumes. Containers can then access the data on the persistent storage. Once the container is deleted and iSCSI disks are not used, *kubelet* logs out of the target.
 
