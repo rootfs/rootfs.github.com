@@ -2,10 +2,10 @@
 layout: post
 title: iSCSI as Persistent Storage for Kubernetes and Docker Container
 ---
-### iSCSI Storage
+### Why iSCSI Storage?
 [iSCSI](http://en.wikipedia.org/wiki/ISCSI) has been widely adopted in data centers. It is the default implementation for [OpenStack Cinder](https://wiki.openstack.org/wiki/Cinder). Cinder defines a common block storage interface so storage vendors can supply their own plugins to present their storage products to Nova compute. As it happens, [most of the vendor supplied plugins use iSCSI] (https://wiki.openstack.org/wiki/CinderSupportMatrix).
 
-### Containers: How to Persist Data?
+### Containers: How to Persist Data to iSCSI Storage?
 Persisting Data inside a container can be done in two ways.
 
 
@@ -20,10 +20,10 @@ Host intitiates the iSCSI session, attaches iSCSI disk, and mounts the filesyste
  
 In fact, this approach is the foundation of the iSCSI persistent storage for Kubernetes, discussed in the following.
 
-### What is Kubernetes
+### What is Kubernetes?
 [Kubernetes](https://github.com/GoogleCloudPlatform/kubernetes/) is an open source Linux Container orchestrator developed by Google, Red Hat, etc. Kubernetes creates, schedules, minotors, and deletes containers across a cluster of Linux hosts. Kubernetes defines Containers as "pod", which is declared in a set of json files. 
 
-### How Containers Persist Data in Kubernetes 
+### How Containers Persist Data in Kubernetes?
 A Container running MySQL wants persistent storage so the database can survive. The persistent storage can either be on local host or ideally a shared storage that the host clusters can all access so that when the container is migrated, it can find the persisted data on the new host.
 
 Currently Kubernetes provides [three storage volume types](https://github.com/GoogleCloudPlatform/kubernetes/blob/master/docs/volumes.md): empty_dir, host_dir, and GCE Persistent Disk. 
