@@ -11,7 +11,7 @@ Persisting Data inside a container can be done in two ways.
 
 #### Container sets up iSCSI session
 
-The iSCSI session is initiated inside the container, channel goes through Docker NAT to external iSCSI target. This approach doesn't require host's support and is thus portal. However, the Container is likely to suffer suboptimal performance, because Docker NAT doesn't deliver good performance, as reseachers at IBM [found](http://domino.research.ibm.com/library/cyberdig.nsf/papers/0929052195DD819C85257D2300681E7B/$File/rc25482.pdf). Since iSCSI is highly senstive to network performance, delay or jitters will cause iSCSI connection timieout and retries. This approach is thus not preferred for mission-critical services.
+The iSCSI session is initiated inside the container, channel goes through Docker NAT to external iSCSI target. This approach doesn't require host's support and is thus portal. However, the Container is likely to suffer suboptimal performance, because Docker NAT doesn't deliver good performance, as reseachers at IBM [found](http://domino.research.ibm.com/library/cyberdig.nsf/papers/0929052195DD819C85257D2300681E7B/$File/rc25482.pdf). Since iSCSI is highly senstive to network performance, delay or jitters will cause iSCSI connection timeout and retries. This approach is thus not preferred for mission-critical services.
 
 #### Host sets up iSCSI session
 
