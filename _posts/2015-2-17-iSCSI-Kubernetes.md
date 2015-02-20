@@ -34,16 +34,22 @@ Here is my setup to setup Kubernetes with iSCSI persistent storage. I use Fedora
 
 First get my github repo
 
-   # git clone -b iscsi-pd-merge https://github.com/rootfs/kubernetes
+    # git clone -b iscsi-pd-merge https://github.com/rootfs/kubernetes
    
 then build and install on the Kubernetes node.
 
 Install iSCSI initiator on the node:
 
-   # yum -y install iscsi-initiator-utils
+    # yum -y install iscsi-initiator-utils
    
    
-then edit /etc/iscsi/initiatorname.iscsi and /etc/iscsi/iscsid.conf to match your iSCSI target configuration.
+then edit */etc/iscsi/initiatorname.iscsi* and */etc/iscsi/iscsid.conf* to match your iSCSI target configuration.
 
+I mostly follow these [instructions](http://www.server-world.info/en/note?os=Fedora_21&p=iscsi&f=2) to setup iSCSI initiator and these [instructions](http://www.server-world.info/en/note?os=Fedora_21&p=iscsi) to setup iSCSI target.
 
+Once you have installed iSCSI initiator and new Kubernetes, you can create a pod based on my [example](https://github.com/rootfs/kubernetes/blob/iscsi-pd-merge/examples/iscsi-pd/iscsi-pd.json). In the pod JSON, you need to provide *portal* (the iSCSI target's **IP** address and *port* if not the default port 3260), target's *iqn*, *lun*, and the type of the filesystem that has been created on the lun, and *readOnly* boolean. 
+
+Once your pod is created, run it on the Kubernetes master:
+
+    #
 
