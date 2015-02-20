@@ -36,7 +36,7 @@ First get my github repo
 
     # git clone -b iscsi-pd-merge https://github.com/rootfs/kubernetes
    
-then build and install on the Kubernetes node.
+then build and install on the Kubernetes master and node.
 
 Install iSCSI initiator on the node:
 
@@ -51,5 +51,19 @@ Once you have installed iSCSI initiator and new Kubernetes, you can create a pod
 
 Once your pod is created, run it on the Kubernetes master:
 
-    #
+    #cluster/kubectl.sh create -f your_new_pod.json
 
+Here is my command and output:
+
+    # cluster/kubectl.sh create -f examples/iscsi-pd/iscsi-pd.json 
+    current-context: ""
+    Running: cluster/../cluster/gce/../../_output/local/bin/linux/amd64/kubectl create -f examples/iscsi-pd/iscsi-pd.json
+    iscsipd
+    
+On the Kubernetes node, I got these in mount output
+```
+/dev/sdb on /var/lib/kubelet/plugins/kubernetes.io/iscsi-pd/iscsi/10.16.154.81:3260/iqn.2014-12.world.server:storage.target1/lun/0 type ext4 (ro,relatime,stripe=1024,data=ordered)
+/dev/sdb on /var/lib/kubelet/pods/74695f6c-b86d-11e4-a4a4-d4bed9b39058/volumes/kubernetes.io~iscsi-pd/iscsipd-ro type ext4 (ro,relatime,stripe=1024,data=ordered)
+/dev/sdc on /var/lib/kubelet/plugins/kubernetes.io/iscsi-pd/iscsi/10.16.154.81:3260/iqn.2014-12.world.server:storage.target1/lun/1 type xfs (rw,relatime,attr2,inode64,noquota)
+/dev/sdc on /var/lib/kubelet/pods/74695f6c-b86d-11e4-a4a4-d4bed9b39058/volumes/kubernetes.io~iscsi-pd/iscsipd-rw type xfs (rw,relatime,attr2,inode64,noquota)
+```
