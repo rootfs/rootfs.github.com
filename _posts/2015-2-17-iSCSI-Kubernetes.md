@@ -21,9 +21,14 @@ Storage and Cloud vendors have spent quite some efforts to create a common platf
 Since on-premise enterprise data centers and OpenStack providers have already invested in iSCSI storage. When they deploy Kubernetes, it is logical that they want Containers access data living on iSCSI storage. It is thus desirable for Kubernetes to support iSCSI disk based persistent volume
 
 ### Implementation
-[My Kubernetes pull request](https://github.com/GoogleCloudPlatform/kubernetes/pull/4612) provides a solution to this end. A Kubernetes pod can use iSCSI disk as persistent storage for read and write. As exhibited in this pod [example](https://github.com/rootfs/kubernetes/blob/iscsi-pd-merge/examples/iscsi-pd/iscsi-pd.json), this pod declares two containers: both uses iSCSI LUNs. Container *iscsipd-ro* 
+[My Kubernetes pull request](https://github.com/GoogleCloudPlatform/kubernetes/pull/4612) provides a solution to this end. 
 
-![_config.yml]({{ site.baseurl }}/images/architecture.png)
+As seen in this  high level architecture ![_config.yml]({{ site.baseurl }}/images/architecture.png)
+When *kubelete* creates the pod on the *node*(previously known as *minion*), it logins into iSCSI target, and mounts the specified disks to the container's volumes. Containers can then access the data on the persistent storage. Once the container is deleted and iSCSI disks are not used, *kubelet* logs out of the target.
+
+A Kubernetes pod can use iSCSI disk as persistent storage for read and write. As exhibited in this pod [example](https://github.com/rootfs/kubernetes/blob/iscsi-pd-merge/examples/iscsi-pd/iscsi-pd.json), this pod declares two containers: both uses iSCSI LUNs. Container *iscsipd-ro* mounts the read-only ext4 filesystem backed by iSCSI LUN 0 to _/mnt/iscsipd_, and Container *iscsipd-ro* mounts the read-write xfs filesystem backed by iSCSI LUN 1 to _/mnt/iscsipd_. 
+
+
 
 
 
