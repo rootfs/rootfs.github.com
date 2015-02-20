@@ -91,7 +91,8 @@ On the Kubernetes node, I got these in mount output
 
 
  Run *docker inspect* and I found the Containers mounted the host directory into the their */mnt/iscsipd* directory.
- ```c
+ 
+ ```javascript
     # docker ps
     CONTAINER ID        IMAGE                     COMMAND                CREATED             STATUS              PORTS                    NAMES
     cc9bd22d9e9d        kubernetes/pause:latest   "/pause"               3 minutes ago       Up 3 minutes                                 k8s_iscsipd-rw.12d8f0c5_iscsipd.default.etcd_4ab78fdc-b927-11e4-ade6-d4bed9b39058_e3f49dcc                               
