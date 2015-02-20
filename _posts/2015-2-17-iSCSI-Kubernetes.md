@@ -3,8 +3,6 @@ layout: post
 title: iSCSI as Kubernetes Persistent Storage
 ---
 
-![_config.yml]({{ site.baseurl }}/images/architecture.png)
-
 ### What is Kubernetes
 [Kubernetes](https://github.com/GoogleCloudPlatform/kubernetes/) is an open source Linux Container orchestrator developed by Google, Red Hat, etc. Kubernetes creates, schedules, minotors, and deletes containers across a cluster of Linux hosts. Kubernetes defines Containers as "pod", which is declared in a set of json files. 
 
@@ -17,9 +15,15 @@ Currently Kubernetes provides [three storage volume types](https://github.com/Go
 2. host_dir. host_dir presents a directory on the host to the container. Container sees this directory through a local mountpoint. Steve Watts has written an excellent [blog](http://www.emergingafrican.com/2015/02/enabling-docker-volumes-and-kubernetes.html) on provisioning NFS to containers by way of host_dir. 
 3. GCE Persistent Disk. You can also use the persistent storage service available at Google Compute Engine. Kubernetes allows containers to access data residing on GCE Persisent Disk. 
 
-### How Needs New Storage and Why iSCSI?
+### iSCSI Disk: a New Persistent Storage for Kubernetes
+Storage and Cloud vendors have spent quite some efforts to create a common platform so they can work together. [OpenStack Cinder](https://wiki.openstack.org/wiki/Cinder) is a success story. It defines a common block storage interface so storage vendors can supply their own plugins to present their storage products to Nova compute. As it happens, most of the vendor supplied plugins use iSCSI (https://wiki.openstack.org/wiki/CinderSupportMatrix).
 
+Since on-premise enterprise data centers and OpenStack providers have already invested in iSCSI storage. When they deploy Kubernetes, it is logical that they want Containers access data living on iSCSI storage. It is thus desirable for Kubernetes to support iSCSI disk based persistent volume
 
+### Implementation
+[My Kubernetes pull request](https://github.com/GoogleCloudPlatform/kubernetes/pull/4612) provides a solution to this end. A Kubernetes pod can use iSCSI disk as persistent storage for read and write. As exhibited in this pod [example](https://github.com/rootfs/kubernetes/blob/iscsi-pd-merge/examples/iscsi-pd/iscsi-pd.json), this pod declares two containers: both uses iSCSI LUNs. Container *iscsipd-ro* 
+
+![_config.yml]({{ site.baseurl }}/images/architecture.png)
 
 
 
