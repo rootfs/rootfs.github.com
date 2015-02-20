@@ -6,7 +6,7 @@ title: iSCSI as Persistent Storage for Kubernetes and Docker Container
 [iSCSI](http://en.wikipedia.org/wiki/ISCSI) has been widely adopted in data centers. It is the default implementation for [OpenStack Cinder](https://wiki.openstack.org/wiki/Cinder). Cinder defines a common block storage interface so storage vendors can supply their own plugins to present their storage products to Nova compute. As it happens, [most of the vendor supplied plugins use iSCSI] (https://wiki.openstack.org/wiki/CinderSupportMatrix).
 
 ### Containers: How to Persist Data to iSCSI Storage?
-Persisting aata inside a container can be done in two ways.
+Persisting data inside a container can be done in two ways.
 
 
 #### Container sets up iSCSI session
