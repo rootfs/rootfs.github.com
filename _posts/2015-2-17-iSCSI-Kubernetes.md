@@ -61,6 +61,8 @@ Here is my command and output:
     iscsipd
     
 On the Kubernetes node, I got these in mount output
+
+
 ```
 /dev/sdb on /var/lib/kubelet/plugins/kubernetes.io/iscsi-pd/iscsi/10.16.154.81:3260/iqn.2014-12.world.server:storage.target1/lun/0 type ext4 (ro,relatime,stripe=1024,data=ordered)
 /dev/sdb on /var/lib/kubelet/pods/74695f6c-b86d-11e4-a4a4-d4bed9b39058/volumes/kubernetes.io~iscsi-pd/iscsipd-ro type ext4 (ro,relatime,stripe=1024,data=ordered)
