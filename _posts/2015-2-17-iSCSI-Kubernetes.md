@@ -24,11 +24,26 @@ Since on-premise enterprise data centers and OpenStack providers have already in
 [My Kubernetes pull request](https://github.com/GoogleCloudPlatform/kubernetes/pull/4612) provides a solution to this end. 
 
 As seen in this  high level architecture ![_config.yml]({{ site.baseurl }}/images/architecture.png)
+
 When *kubelete* creates the pod on the *node*(previously known as *minion*), it logins into iSCSI target, and mounts the specified disks to the container's volumes. Containers can then access the data on the persistent storage. Once the container is deleted and iSCSI disks are not used, *kubelet* logs out of the target.
 
 A Kubernetes pod can use iSCSI disk as persistent storage for read and write. As exhibited in this pod [example](https://github.com/rootfs/kubernetes/blob/iscsi-pd-merge/examples/iscsi-pd/iscsi-pd.json), this pod declares two containers: both uses iSCSI LUNs. Container *iscsipd-ro* mounts the read-only ext4 filesystem backed by iSCSI LUN 0 to _/mnt/iscsipd_, and Container *iscsipd-ro* mounts the read-write xfs filesystem backed by iSCSI LUN 1 to _/mnt/iscsipd_. 
 
+### How to Use it?
+Here is my setup to setup Kubernetes with iSCSI persistent storage. I use Fedora 21 on Kubernetes node. 
 
+First get my github repo
+
+   # git clone -b iscsi-pd-merge https://github.com/rootfs/kubernetes
+   
+then build and install on the Kubernetes node.
+
+Install iSCSI initiator on the node:
+
+   # yum -y install iscsi-initiator-utils
+   
+   
+then edit /etc/iscsi/initiatorname.iscsi and /etc/iscsi/iscsid.conf to match your iSCSI target configuration.
 
 
 
