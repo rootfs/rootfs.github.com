@@ -5,9 +5,9 @@ title: Storage Server in the Cloud?
 ### What does it mean, really?
 
 Cloud evangelists forecast the future of data center are in the Cloud, yet I am not convinced that leads to the demise of 
-storage servers. I believe storage vendors will find a new home for their products: **Cloud**. NetApp, a storage vendor 
-who sells NAS boxes transforms itself to an AWS server image provider. The server image just provides the same 
-function as the NAS boxes do. 
+storage servers. I believe storage vendors will find a new home for their products: **Cloud**. 
+
+NetApp, a storage vendor who sells NAS boxes transforms itself to an AWS server image provider. The server image just provides the same function as the NAS boxes do. 
 
 ### Why people still need storage servers, even in Cloud?
 
