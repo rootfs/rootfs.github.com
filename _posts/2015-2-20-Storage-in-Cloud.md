@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Storage Server in the Cloud?
+title: NAS Server in the Cloud?
 ---
 ### What does it mean, really?
 
