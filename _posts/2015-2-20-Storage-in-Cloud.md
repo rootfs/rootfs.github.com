@@ -13,7 +13,7 @@ NetApp, a storage vendor who sells NAS boxes transforms itself to an AWS server 
 
 #### Compatibility
 
-Cloud storage like S3 and Swift are object store, while most enterprise applications still work file and block based storage. 
+Cloud storage like S3 and Swift are object store, while most enterprise applications still work with file and block based storage. 
 Shifting data center into the Cloud must first deal with this API level differences.
 
 #### Portability
