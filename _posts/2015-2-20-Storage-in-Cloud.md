@@ -18,7 +18,7 @@ Shifting data center into the Cloud must first deal with this API level differen
 
 #### Portability
 
-Cloud storage may vary from one vendor to another, with absence of industry wide protocols. This poses a migration risk for
+Cloud storage technologies may vary from one vendor to another, with absence of industry wide protocols. This poses a migration risk for
 Cloud hoppers. In constrast, NFS/CIFS/iSCSI/FC protocols are found in all storage servers, as long as in-cloud storage server exists,
 such migration risk is much deminished.
 
