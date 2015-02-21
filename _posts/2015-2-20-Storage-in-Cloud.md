@@ -27,7 +27,8 @@ such migration risk is much deminished.
 It is undeniable that storage software from EMC, NetApp, HP, Hitachi, and IBM pride themselves on technologies (and patents) that Cloud storage 
 don't yet have. 
 
-#### How does it look like?
+### How does it look like?
 
 My rough component level comparision is illustrated here.
+
 ![_config.yml]({{ site.baseurl }}/images/cloud-server.png)
