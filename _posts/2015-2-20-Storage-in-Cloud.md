@@ -24,8 +24,7 @@ such migration risk is much deminished.
 
 #### Value
 
-It is undeniable that storage software from EMC, NetApp, HP, Hitachi, and IBM pride themselves on technologies (and patents) that Cloud storage 
-don't yet have. 
+It is undeniable that storage vendors like EMC, NetApp, HP, Hitachi, and IBM pride themselves on technologies (and patents) that Cloud storage don't yet have. Their value proposition won't evaporate any time soon.
 
 ### How does it look like?
 
