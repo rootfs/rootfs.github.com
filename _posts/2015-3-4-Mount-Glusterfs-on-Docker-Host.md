@@ -20,6 +20,8 @@ Docker image is *hchen/install-glusterfs-on-fc21*
 ## How it works
 
 First pull my Docker image
+
+
     # docker pull hchen/install-glusterfs-on-fc21
     
 Then run the image in [Super Privileged Container](http://developerblog.redhat.com/2014/11/06/introducing-a-super-privileged-container-concept/) mode
