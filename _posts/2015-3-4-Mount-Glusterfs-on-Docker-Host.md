@@ -11,7 +11,7 @@ I just worked out a solution to create a [Super Privileged Container](http://dev
 
 The idea is to inject my own mount before [mount(2)](http://linux.die.net/man/2/mount) is called, so we can reset the namespace, thank Colin for the mount [patch idea](https://lists.projectatomic.io/projectatomic-archives/atomic-devel/2015-February/msg00064.html).
 
-But since I don't want to patch any existing util, I followed Sage Weil's suggestion and used ld.preload instead. This idea can thus be applied to gluster, nfs, cephfs, and so on, once we update the switch [here](https://github.com/rootfs/install-glusterfs-on-fc21/blob/master/mymount.c#L46)
+But since I don't want to patch any existing util, I followed Sage Weil's suggestion and used [ld.preload](http://man7.org/linux/man-pages/man8/ld.so.8.html) instead. This idea can thus be applied to gluster, nfs, cephfs, and so on, once we update the switch [here](https://github.com/rootfs/install-glusterfs-on-fc21/blob/master/mymount.c#L46)
 
 The code is at my [repo](https://github.com/rootfs/install-glusterfs-on-fc21)
 Docker image is *hchen/install-glusterfs-on-fc21*
