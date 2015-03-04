@@ -13,8 +13,8 @@ The idea is to inject my own mount before [mount(2)](http://linux.die.net/man/2/
 
 But since I don't want to patch any existing util, I followed [Sage Weil's suggestion](http://pad.ceph.com/p/I-containers) and used [ld.preload](http://man7.org/linux/man-pages/man8/ld.so.8.html) instead. This idea can thus be applied to gluster, nfs, cephfs, and so on, once we update the switch [here](https://github.com/rootfs/install-glusterfs-on-fc21/blob/master/mymount.c#L46)
 
-The code is at my [repo](https://github.com/rootfs/install-glusterfs-on-fc21)
-Docker image is *hchen/install-glusterfs-on-fc21*
+The code is at my [repo](https://github.com/rootfs/install-glusterfs-on-fc21). 
+Docker image is [hchen/install-glusterfs-on-fc21](https://registry.hub.docker.com/u/hchen/install-glusterfs-on-fc21/)
 
 
 ## How it works
