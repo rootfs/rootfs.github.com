@@ -23,7 +23,8 @@ First pull my Docker image
 
 
     # docker pull hchen/install-glusterfs-on-fc21
-    
+
+
 Then run the image in [Super Privileged Container](http://developerblog.redhat.com/2014/11/06/introducing-a-super-privileged-container-concept/) mode
 
     #  docker run  --privileged -d  --net=host -e sysimage=/host -v /:/host -v /dev:/dev -v /proc:/proc -v /var:/var -v /run:/run hchen/install-glusterfs-on-fc21
