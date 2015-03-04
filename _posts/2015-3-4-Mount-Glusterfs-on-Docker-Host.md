@@ -38,4 +38,4 @@ My PID is *865*, I use this process's namespace to run the mount, note  the  */m
 
     # nsenter --mount=/proc/865/ns/mnt mount -t glusterfs <your_gluster_brick>:<your_gluster_volueme>  /mnt
     
-Alas, you can check on your Docker host  to see this gluster fs mount 
+Alas, you can check on your Docker host  to see this gluster fs mount at */mnt*.
